@@ -28,7 +28,11 @@ function Home({ navigation }) {
           iconName={'organization'}
           onPress={() => navigation.navigate('Organizations')}
         />
-        <HomeButton textValue={'نتائج التوزيع'} iconName={'database'} />
+        <HomeButton
+          textValue={'نتائج التوزيع'}
+          iconName={'database'}
+          onPress={() => navigation.navigate('Departments')}
+        />
       </View>
     </View>
   )

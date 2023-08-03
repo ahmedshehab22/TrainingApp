@@ -6,7 +6,7 @@ import { companies } from '../data/companies'
 function CompaniesScreen({ navigation }) {
   const renderItem = ({ item, index }) => (
     <CompanyCard
-      name={item.name ? item.name.toString() : '#####'}
+      name={item.companyName ? item.companyName.toString() : '#####'}
       phone1={item.phone1.toString()}
       phone2={item.phone2.toString()}
       trustLevel={item.trustLevel.toString()}
@@ -17,7 +17,7 @@ function CompaniesScreen({ navigation }) {
       location={item.location.toString()}
       onPress={() =>
         navigation.replace('Organization Details', {
-          name: item.name.toString(),
+          name: item.companyName.toString(),
           phone1: item.phone1.toString(),
           phone2: item.phone2.toString(),
           trustLevel: item.trustLevel,

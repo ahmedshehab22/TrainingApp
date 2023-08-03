@@ -1,7 +1,29 @@
 import DEPARTMENTS from '../constants/DEPARTMENTS'
 export let companies = [
   {
-    name: 'Hassan Allam',
+    companyName: 'Hassan xxx',
+    phone1: '01096157768',
+    phone2: '01096153660',
+    trustLevel: 100,
+    location: 'hamsasmdskmcsdmcofdsmcomc',
+    email: 'ahmed.essam9608@gmail.com',
+    specialization: DEPARTMENTS.COMMUNICATION,
+    thirdYearStudents: 10,
+    forthYearStudents: 20
+  },
+  {
+    companyName: 'Hassan Allam',
+    phone1: '01096157768',
+    phone2: '01096153660',
+    trustLevel: 100,
+    location: 'hamsasmdskmcsdmcofdsmcomc',
+    email: 'ahmed.essam9608@gmail.com',
+    specialization: DEPARTMENTS.COMPUTER,
+    thirdYearStudents: 10,
+    forthYearStudents: 20
+  },
+  {
+    companyName: 'kalbz',
     phone1: '01096157768',
     phone2: '01096153660',
     trustLevel: 97,
@@ -12,21 +34,10 @@ export let companies = [
     forthYearStudents: 20
   },
   {
-    name: 'kalbz',
+    companyName: 'bembo',
     phone1: '01096157768',
     phone2: '01096153660',
-    trustLevel: 97,
-    location: 'hamsasmdskmcsdmcofdsmcomc',
-    email: 'ahmed.essam9608@gmail.com',
-    specialization: DEPARTMENTS.COMPUTER,
-    thirdYearStudents: 10,
-    forthYearStudents: 20
-  },
-  {
-    name: 'bembo',
-    phone1: '01096157768',
-    phone2: '01096153660',
-    trustLevel: 97,
+    trustLevel: 55,
     location: 'hamsasmdskmcsdmcofdsmcomc',
     email: 'ahmed.essam9608@gmail.com',
     specialization: DEPARTMENTS.COMPUTER,
@@ -46,7 +57,7 @@ export function addCompany(
   n4
 ) {
   companies.push({
-    name: name.toString(),
+    companyName: name.toString(),
     phone1: phone1.toString(),
     phone2: phone2.toString(),
     trustLevel: Number(trustLevel),
@@ -71,7 +82,7 @@ export function updateCompany(
   n4
 ) {
   companies[Number(index)] = {
-    name: name.toString(),
+    companyName: name.toString(),
     phone1: phone1.toString(),
     phone2: phone2.toString(),
     trustLevel: Number(trustLevel),
@@ -81,4 +92,11 @@ export function updateCompany(
     thirdYearStudents: Number(n3),
     forthYearStudents: Number(n4)
   }
+}
+export function getSortedSpecializedArrayOfCompanies(specialization) {
+  let array = companies.filter(function (company) {
+    return company.specialization === specialization
+  })
+  array = array.sort((a, b) => b.trustLevel - a.trustLevel)
+  return array
 }
