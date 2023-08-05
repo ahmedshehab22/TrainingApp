@@ -26,6 +26,7 @@ function CompaniesScreen({ navigation }) {
           thirdYearStudents: item.thirdYearStudents.toString(),
           forthYearStudents: item.forthYearStudents.toString(),
           location: item.location.toString(),
+          history: item.history,
           index: index
         })
       }

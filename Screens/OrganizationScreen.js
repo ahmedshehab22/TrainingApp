@@ -1,6 +1,13 @@
 import React from 'react'
 import { useCallback } from 'react'
-import { StyleSheet, Text, View, ScrollView, StatusBar } from 'react-native'
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  StatusBar,
+  FlatList
+} from 'react-native'
 import COLORS from '../constants/COLORS'
 import Input from '../Components/Input'
 import Button from '../Components/Button'
@@ -9,6 +16,7 @@ import Department from '../Components/Department'
 import DEPARTMENTS from '../constants/DEPARTMENTS'
 import { addCompany, updateCompany } from '../data/companies'
 function OrganizationScreen({ navigation, route }) {
+  // history = route.params.history
   const [inputs, setInputs] = React.useState({
     email: route.params.email,
     orgName: route.params.name,
@@ -38,7 +46,6 @@ function OrganizationScreen({ navigation, route }) {
     let location = inputs.location
     let n3 = inputs.thirdYearNumber
     let n4 = inputs.forthYearNumber
-
     spec = inputs.specialization
     n3 = n3
     n4 = n4
@@ -121,8 +128,26 @@ function OrganizationScreen({ navigation, route }) {
             onChangeText1={(text) => handleOnChange(text, 'thirdYearNumber')}
             onChangeText2={(text) => handleOnChange(text, 'forthYearNumber')}
           />
-
           <Button title={'Save'} onPress={saveData} />
+          <Text> __________________________________________________</Text>
+          <Text style={styles.historytxt}>
+            History of the organization at the last {history.length} years.
+          </Text>
+          <FlatList
+            data={history}
+            keyExtractor={(item) => item.index}
+            renderItem={({ item, index }) => {
+              return (
+                <View>
+                  <Text style={styles.hint}>At {index + 2019} : </Text>
+                  <Text style={styles.descriptionText}>Number of students</Text>
+                  <Text style={styles.box}>{item.num}</Text>
+                  <Text style={styles.descriptionText}>Trust Level </Text>
+                  <Text style={styles.box}>{item.trust}%</Text>
+                </View>
+              )
+            }}
+          />
         </View>
       </ScrollView>
     </View>
@@ -157,6 +182,29 @@ const styles = StyleSheet.create({
     color: COLORS.red,
     fontSize: 12,
     marginTop: 7
+  },
+  historytxt: {
+    color: COLORS.darkBlue,
+    fontSize: 20,
+    fontWeight: 'bold'
+  },
+  hint: {
+    color: COLORS.darkBlue,
+    fontSize: 18,
+    marginVertical: 10,
+    paddingTop: 10
+  },
+  box: {
+    height: 55,
+    flexDirection: 'row',
+    backgroundColor: COLORS.grey,
+    borderWidth: 0.5,
+    paddingHorizontal: 15,
+    alignItems: 'center',
+    borderColor: COLORS.light,
+    padding: 15,
+    fontSize: 15,
+    fontWeight: 'bold'
   }
 })
 export default OrganizationScreen

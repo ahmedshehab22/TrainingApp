@@ -1,8 +1,113 @@
 import React from 'react'
 import { StyleSheet, Text, View, Image, StatusBar } from 'react-native'
 import HomeButton from '../Components/HomeButton'
-function Home({ navigation }) {
+import * as SQLite from 'expo-sqlite'
+import { useState, useEffect } from 'react'
+import { companies, addCompany } from '../data/companies'
+
+export function Home({ navigation }) {
   const { container, welcomeText, buttonsContainer } = styles
+
+  const db = SQLite.openDatabase('backend-DatabaseTraining.db')
+  const [isLoading, setIsLoading] = useState(true)
+  const [currentCompany, setCurrentCompany] = useState(undefined)
+
+  const getCompaines = () => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        'SELECT * FROM Organization',
+        null,
+        (txObj, resultSet) => (companies = resultSet.rows._array),
+        (txObj, error) => console.log(error)
+      )
+    })
+  }
+  const addOrganization = (
+    comp_name,
+    Spec,
+    e_mail,
+    capacity,
+    period,
+    telephone,
+    supervisor,
+    trust_level,
+    address
+  ) => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        'INSERT INTO Organization(comp_name, Specialization, e_mail, capacity, training_period, telephone, supervisor, trust_level, address)',
+        [
+          comp_name,
+          Spec,
+          e_mail,
+          capacity,
+          period,
+          telephone,
+          supervisor,
+          trust_level,
+          address
+        ]
+      ),
+        (txObj, resultSet) => {
+          updateCompany(
+            comp_name,
+            Spec,
+            e_mail,
+            capacity,
+            period,
+            telephone,
+            supervisor,
+            trust_level,
+            address
+          )
+        },
+        (txObj, error) => console.log(error)
+    })
+  }
+
+  const updateOrganization = (
+    comp_name,
+    Spec,
+    e_mail,
+    capacity,
+    period,
+    telephone,
+    supervisor,
+    trust_level,
+    address
+  ) => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        'update Organization set comp_name = ?, Spec = ?, e_mail = ?, capacity = ?, period= ?, telephone = ?, supervisor = ?, trust_level = ?, address = ? \
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        [
+          comp_name,
+          Spec,
+          e_mail,
+          capacity,
+          period,
+          telephone,
+          supervisor,
+          trust_level,
+          address
+        ]
+      ),
+        (txObj, resultSet) => {
+          addCompany(
+            comp_name,
+            Spec,
+            e_mail,
+            capacity,
+            period,
+            telephone,
+            supervisor,
+            trust_level,
+            address
+          )
+        },
+        (txObj, error) => console.log(error)
+    })
+  }
 
   return (
     <View style={container}>
@@ -29,7 +134,7 @@ function Home({ navigation }) {
           onPress={() => navigation.navigate('Organizations')}
         />
         <HomeButton
-          textValue={'نتائج التوزيع'}
+          textValue={'اضافة طلبة التدريب'}
           iconName={'database'}
           onPress={() => navigation.navigate('Departments')}
         />

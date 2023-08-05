@@ -1,6 +1,13 @@
 import React from 'react'
 import { useCallback } from 'react'
-import { StyleSheet, Text, View, ScrollView, StatusBar } from 'react-native'
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  StatusBar,
+  TextInput
+} from 'react-native'
 import COLORS from '../constants/COLORS'
 import Input from '../Components/Input'
 import Button from '../Components/Button'
