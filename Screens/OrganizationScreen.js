@@ -14,15 +14,15 @@ import Button from '../Components/Button'
 import Slider from '@react-native-community/slider'
 import Department from '../Components/Department'
 import DEPARTMENTS from '../constants/DEPARTMENTS'
-import { addCompany, updateCompany } from '../data/companies'
+import { updateOrg } from '../data/Database'
 function OrganizationScreen({ navigation, route }) {
   // history = route.params.history
   const [inputs, setInputs] = React.useState({
     email: route.params.email,
     orgName: route.params.name,
-    phone1: route.params.phone1,
-    phone2: route.params.phone2,
+    phone: route.params.phone,
     location: route.params.location,
+    subervisor: route.params.subervisor,
     trustLevel: route.params.trustLevel,
     thirdYearNumber: route.params.thirdYearStudents,
     forthYearNumber: route.params.forthYearStudents,
@@ -40,8 +40,7 @@ function OrganizationScreen({ navigation, route }) {
   function saveData() {
     let name = inputs.orgName
     let email = inputs.email
-    let phone1 = inputs.phone1
-    let phone2 = inputs.phone2
+    let phone = inputs.phone
     let trustLevel = inputs.trustLevel
     let location = inputs.location
     let n3 = inputs.thirdYearNumber
@@ -49,13 +48,11 @@ function OrganizationScreen({ navigation, route }) {
     spec = inputs.specialization
     n3 = n3
     n4 = n4
-    console.log(name, email, phone1, phone2, location, trustLevel, spec, n3, n4)
-    updateCompany(
+    updateOrg(
       route.params.index,
       name,
       email,
-      phone1,
-      phone2,
+      phone,
       location,
       trustLevel,
       spec,
@@ -81,17 +78,9 @@ function OrganizationScreen({ navigation, route }) {
             keyboardType="numeric"
             placeholder="Enter Organization's phone number"
             iconName={'phone'}
-            text={inputs.phone1}
-            label="Phone Number 1"
-            onChangeText={(text) => handleOnChange(text, 'phone1')}
-          />
-          <Input
-            keyboardType="numeric"
-            placeholder="Enter another phone number ( optional )"
-            iconName={'phone'}
-            text={inputs.phone2}
-            label="Phone Number 2"
-            onChangeText={(text) => handleOnChange(text, 'phone2')}
+            text={inputs.phone}
+            label="Phone Number "
+            onChangeText={(text) => handleOnChange(text, 'phone')}
           />
           <Input
             keyboardType="email-address"
@@ -107,6 +96,13 @@ function OrganizationScreen({ navigation, route }) {
             text={inputs.location}
             label="Main Location"
             onChangeText={(text) => handleOnChange(text, 'location')}
+          />
+          <Input
+            placeholder="Enter Organization's supervisor name"
+            iconName={'drive-file-rename-outline'}
+            text={inputs.subervisor}
+            label="supervisor name"
+            onChangeText={(text) => handleOnChange(text, 'subervisor')}
           />
           <Text>Trust Level : {inputs.trustLevel}</Text>
           <Slider
@@ -129,11 +125,11 @@ function OrganizationScreen({ navigation, route }) {
             onChangeText2={(text) => handleOnChange(text, 'forthYearNumber')}
           />
           <Button title={'Save'} onPress={saveData} />
-          <Text> __________________________________________________</Text>
-          <Text style={styles.historytxt}>
+          {/* <Text> __________________________________________________</Text>
+          {/* <Text style={styles.historytxt}>
             History of the organization at the last {history.length} years.
-          </Text>
-          <FlatList
+          </Text> */}
+          {/* <FlatList
             data={history}
             keyExtractor={(item) => item.index}
             renderItem={({ item, index }) => {
@@ -147,7 +143,7 @@ function OrganizationScreen({ navigation, route }) {
                 </View>
               )
             }}
-          />
+          /> */}
         </View>
       </ScrollView>
     </View>

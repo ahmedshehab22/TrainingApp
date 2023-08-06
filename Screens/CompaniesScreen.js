@@ -1,33 +1,31 @@
 import React from 'react'
 import { View, StyleSheet, FlatList } from 'react-native'
 import CompanyCard from '../Components/CompanyCard'
-import { companies } from '../data/companies'
-
+import { ShowOrganization } from '../data/Database'
 function CompaniesScreen({ navigation }) {
   const renderItem = ({ item, index }) => (
     <CompanyCard
-      name={item.companyName ? item.companyName.toString() : '#####'}
-      phone1={item.phone1.toString()}
-      phone2={item.phone2.toString()}
-      trustLevel={item.trustLevel.toString()}
-      email={item.email.toString()}
-      specialization={item.specialization.toString()}
-      thirdYearStudents={item.thirdYearStudents.toString()}
-      forthYearStudents={item.forthYearStudents.toString()}
-      location={item.location.toString()}
+      name={item.comp_name ? item.comp_name.toString() : '#####'}
+      phone={item.telephone.toString()}
+      forthYearStudents={item.Number_Of_Students4.toString()}
+      thirdYearStudents={item.Number_Of_Students3.toString()}
+      trustLevel={item.trust_Level.toString()}
+      email={item.e_mail.toString()}
+      specialization={item.Specialization.toString()}
+      supervisor={item.supervisor.toString()}
+      location={item.address.toString()}
       onPress={() =>
         navigation.replace('Organization Details', {
-          name: item.companyName.toString(),
-          phone1: item.phone1.toString(),
-          phone2: item.phone2.toString(),
-          trustLevel: item.trustLevel,
-          email: item.email.toString(),
-          specialization: item.specialization.toString(),
-          thirdYearStudents: item.thirdYearStudents.toString(),
-          forthYearStudents: item.forthYearStudents.toString(),
-          location: item.location.toString(),
-          history: item.history,
-          index: index
+          name: item.comp_name.toString(),
+          phone: item.telephone.toString(),
+          trustLevel: item.trust_Level.toString(),
+          email: item.e_mail.toString(),
+          specialization: item.Specialization.toString(),
+          thirdYearStudents: item.Number_Of_Students3.toString(),
+          forthYearStudents: item.Number_Of_Students4.toString(),
+          location: item.address.toString(),
+          subervisor:item.supervisor.toString(),
+          index:item.comp_id
         })
       }
     />
@@ -36,7 +34,7 @@ function CompaniesScreen({ navigation }) {
     <View style={styles.container}>
       <FlatList
         style={styles.list}
-        data={companies}
+        data={ShowOrganization()}
         renderItem={renderItem}
         keyExtractor={(item) => item.name}
       />

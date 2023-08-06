@@ -2,7 +2,6 @@ import React from 'react'
 import { View, StyleSheet, Text, SectionList } from 'react-native'
 import COLORS from '../constants/COLORS'
 import { getThirdYear, getForthYear } from '../data/getData'
-
 function ResultScreen({ navigation, route }) {
   const DATA = [
     {

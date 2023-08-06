@@ -1,7 +1,4 @@
 import DEPARTMENTS from '../constants/DEPARTMENTS'
-
-export let companies = []
-
 export function addCompany(
   comp_name,
   Spec,

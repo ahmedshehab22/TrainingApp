@@ -3,25 +3,35 @@ import { StyleSheet, Text, View, Image, StatusBar } from 'react-native'
 import HomeButton from '../Components/HomeButton'
 import * as SQLite from 'expo-sqlite'
 import { useState, useEffect } from 'react'
-import { companies, addCompany } from '../data/companies'
+import { companies, addCompany, setCompanies } from '../data/companies'
+
+// export function getCompaines() {
+//   const db = SQLite.openDatabase('backend/Training.db')
+//   db.transaction((dbManager) => {
+//     dbManager.executeSql(
+//       'SELECT * FROM Organization',
+//       null,
+//       (_, resultSet) => console.log(resultSet.rows._array.length),
+//       (_, error) => console.log(error)
+//     )
+//   })
+// }
 
 export function Home({ navigation }) {
   const { container, welcomeText, buttonsContainer } = styles
-
-  const db = SQLite.openDatabase('backend-DatabaseTraining.db')
   const [isLoading, setIsLoading] = useState(true)
   const [currentCompany, setCurrentCompany] = useState(undefined)
 
-  const getCompaines = () => {
-    db.transaction((tx) => {
-      tx.executeSql(
-        'SELECT * FROM Organization',
-        null,
-        (txObj, resultSet) => (companies = resultSet.rows._array),
-        (txObj, error) => console.log(error)
-      )
-    })
-  }
+  // const getCompaines = () => {
+  //   db.transaction((dbManager) => {
+  //     dbManager.executeSql(
+  //       'SELECT * FROM Organization',
+  //       null,
+  //       (_, resultSet) => (companies = useState(resultSet.rows._array)),
+  //       (_, error) => console.log(error)
+  //     )
+  //   })
+  // }
   const addOrganization = (
     comp_name,
     Spec,

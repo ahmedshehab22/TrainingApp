@@ -14,15 +14,15 @@ import Button from '../Components/Button'
 import Slider from '@react-native-community/slider'
 import Department from '../Components/Department'
 import DEPARTMENTS from '../constants/DEPARTMENTS'
-import { addCompany } from '../data/companies'
+import { addOrganization } from '../data/Database'
 
 function AddOrg({ navigation }) {
   const [inputs, setInputs] = React.useState({
     email: '',
     orgName: '',
-    phone1: '',
-    phone2: '',
+    phone: '',
     location: '',
+    supervisor:'',
     trustLevel: 0,
     commNo: 0,
     elecNo: 0,
@@ -53,9 +53,9 @@ function AddOrg({ navigation }) {
   function saveData() {
     let name = inputs.orgName.toString()
     let email = inputs.email.toString()
-    let phone1 = inputs.phone1.toString()
-    let phone2 = inputs.phone2.toString()
+    let phone = inputs.phone.toString()
     let trustLevel = inputs.trustLevel.toString()
+    let supervisor = inputs.supervisor.toString()
     let location = inputs.location.toString()
     let spec = ''
     let n3 = 0
@@ -103,8 +103,8 @@ function AddOrg({ navigation }) {
     spec = spec.toString()
     n3 = n3.toString()
     n4 = n4.toString()
-    console.log(name, email, phone1, phone2, location, trustLevel, spec, n3, n4)
-    addCompany(name, email, phone1, phone2, location, trustLevel, spec, n3, n4)
+    console.log(name,spec,email,phone,supervisor,location,n3,n4,trustLevel)
+    addOrganization(name,spec,email,phone,supervisor,location,n3,n4,trustLevel)
     navigation.replace('Organizations')
   }
 
@@ -126,15 +126,8 @@ function AddOrg({ navigation }) {
             keyboardType="numeric"
             placeholder="Enter Organization's phone number"
             iconName={'phone'}
-            label="Phone Number 1"
-            onChangeText={(text) => handleOnChange(text, 'phone1')}
-          />
-          <Input
-            keyboardType="numeric"
-            placeholder="Enter another phone number ( optional )"
-            iconName={'phone'}
-            label="Phone Number 2"
-            onChangeText={(text) => handleOnChange(text, 'phone2')}
+            label="Phone Number"
+            onChangeText={(text) => handleOnChange(text, 'phone')}
           />
           <Input
             keyboardType="email-address"
@@ -148,6 +141,12 @@ function AddOrg({ navigation }) {
             iconName={'add-location-alt'}
             label="Main Location"
             onChangeText={(text) => handleOnChange(text, 'location')}
+          />
+          <Input
+            placeholder="Enter Organization's supervisor name"
+            iconName={'drive-file-rename-outline'}
+            label="Supervisor name"
+            onChangeText={(text) => handleOnChange(text, 'supervisor')}
           />
           <Text>Trust Level : {inputs.trustLevel}</Text>
           <Slider

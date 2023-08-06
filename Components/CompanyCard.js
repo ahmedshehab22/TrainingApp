@@ -5,12 +5,12 @@ const CompanyCard = ({
   name,
   specialization,
   email,
-  phone1,
-  phone2,
+  phone,
   trustLevel,
   thirdYearStudents,
   forthYearStudents,
   location,
+  supervisor,
   ...props
 }) => {
   return (
@@ -20,20 +20,16 @@ const CompanyCard = ({
         <Text style={styles.description}>{name}</Text>
       </View>
       <View style={styles.textHolder}>
+        <Text style={styles.title}>Phone:</Text>
+        <Text style={styles.description}>{phone}</Text>
+      </View>
+      <View style={styles.textHolder}>
         <Text style={styles.title}>specialization:</Text>
         <Text style={styles.description}>{specialization}</Text>
       </View>
       <View style={styles.textHolder}>
         <Text style={styles.title}>Email:</Text>
         <Text style={styles.description}>{email}</Text>
-      </View>
-      <View style={styles.textHolder}>
-        <Text style={styles.title}>Phone1:</Text>
-        <Text style={styles.description}>{phone1}</Text>
-      </View>
-      <View style={styles.textHolder}>
-        <Text style={styles.title}>Phone2:</Text>
-        <Text style={styles.description}>{phone2}</Text>
       </View>
       <View style={styles.textHolder}>
         <Text style={styles.title}>Trust Level:</Text>
@@ -50,6 +46,10 @@ const CompanyCard = ({
       <View style={styles.textHolder}>
         <Text style={styles.title}>Location:</Text>
         <Text style={styles.description}>{location}</Text>
+      </View>
+      <View style={styles.textHolder}>
+        <Text style={styles.title}>Supervisor:</Text>
+        <Text style={styles.description}>{supervisor}</Text>
       </View>
     </TouchableOpacity>
   )
