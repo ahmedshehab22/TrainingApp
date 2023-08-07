@@ -9,6 +9,7 @@ import OrganizationScreen from './Screens/OrganizationScreen'
 import DistributionScreen from './Screens/DistributionScreen'
 import ResultScreen from './Screens/ResultScreen'
 import * as SQLite from 'expo-sqlite'
+import addstudent from './Screens/addstudent'
 const Stack = createNativeStackNavigator()
 export default function App() {
   return (
@@ -80,6 +81,17 @@ export default function App() {
             }
           }}
         />
+        {/* <Stack.Screen
+          name="Add students"
+          component={addstudent}
+          options={{
+            headerTintColor: COLORS.darkBlue,
+            headerTitleAlign: 'center',
+            headerTitleStyle: {
+              fontWeight: 'bold'
+            }
+          }}
+        /> */}
       </Stack.Navigator>
     </NavigationContainer>
   )

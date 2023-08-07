@@ -22,7 +22,7 @@ function AddOrg({ navigation }) {
     orgName: '',
     phone: '',
     location: '',
-    supervisor:'',
+    supervisor: '',
     trustLevel: 0,
     commNo: 0,
     elecNo: 0,
@@ -57,9 +57,6 @@ function AddOrg({ navigation }) {
     let trustLevel = inputs.trustLevel.toString()
     let supervisor = inputs.supervisor.toString()
     let location = inputs.location.toString()
-    let spec = ''
-    let n3 = 0
-    let n4 = 0
     if (inputs.commNo + inputs.commNo3 > 0) {
       spec = DEPARTMENTS.COMMUNICATION
       n3 = inputs.commNo3
@@ -103,8 +100,28 @@ function AddOrg({ navigation }) {
     spec = spec.toString()
     n3 = n3.toString()
     n4 = n4.toString()
-    console.log(name,spec,email,phone,supervisor,location,n3,n4,trustLevel)
-    addOrganization(name,spec,email,phone,supervisor,location,n3,n4,trustLevel)
+    console.log(
+      name,
+      spec,
+      email,
+      phone,
+      supervisor,
+      location,
+      n3,
+      n4,
+      trustLevel
+    )
+    addOrganization(
+      name,
+      spec,
+      email,
+      phone,
+      supervisor,
+      location,
+      n3,
+      n4,
+      trustLevel
+    )
     navigation.replace('Organizations')
   }
 

@@ -1,6 +1,5 @@
 import React from 'react'
 import { useCallback } from 'react'
-import {updateOrg} from '../data/Database'
 import {
   StyleSheet,
   Text,
@@ -15,10 +14,10 @@ import Button from '../Components/Button'
 import Slider from '@react-native-community/slider'
 import Department from '../Components/Department'
 import DEPARTMENTS from '../constants/DEPARTMENTS'
-// import { updateOrg } from '../data/Database'
+import { updateOrg, deleteOrg } from '../data/Database'
 function OrganizationScreen({ navigation, route }) {
   // history = route.params.history
-  const  index = route.params.index
+  const index = route.params.index
   const [inputs, setInputs] = React.useState({
     email: route.params.email,
     orgName: route.params.name,
@@ -39,6 +38,10 @@ function OrganizationScreen({ navigation, route }) {
     },
     [inputs]
   )
+  function remove() {
+    deleteOrg(index)
+    navigation.pop()
+  }
   function saveData() {
     let name = inputs.orgName
     let email = inputs.email
@@ -60,7 +63,8 @@ function OrganizationScreen({ navigation, route }) {
       location,
       n3,
       n4,
-      subervisor
+      subervisor,
+      trustLevel
     )
     navigation.pop()
   }
@@ -107,7 +111,13 @@ function OrganizationScreen({ navigation, route }) {
             label="supervisor name"
             onChangeText={(text) => handleOnChange(text, 'subervisor')}
           />
-          <Text>Trust Level : {inputs.trustLevel}</Text>
+          <Input
+            placeholder="Enter Organization's trust level"
+            iconName={'drive-file-rename-outline'}
+            text={inputs.trustLevel}
+            label="Trust level"
+            onChangeText={(text) => handleOnChange(text, 'trustLevel')}
+          />
           {/* <Slider
             style={styles.slider}
             minimumValue={0}
@@ -128,9 +138,10 @@ function OrganizationScreen({ navigation, route }) {
             onChangeText2={(text) => handleOnChange(text, 'forthYearNumber')}
           />
           <Button title={'Save'} onPress={saveData} />
+          <Button title={'Remove organization'} onPress={remove} />
           {/* <Text> __________________________________________________</Text>
           {/* <Text style={styles.historytxt}>
-            History of the organization at the last {history.length} years.
+            History of the organization
           </Text> */}
           {/* <FlatList
             data={history}
