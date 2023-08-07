@@ -1,5 +1,6 @@
 import React from 'react'
 import { useCallback } from 'react'
+import {updateOrg} from '../data/Database'
 import {
   StyleSheet,
   Text,
@@ -14,9 +15,10 @@ import Button from '../Components/Button'
 import Slider from '@react-native-community/slider'
 import Department from '../Components/Department'
 import DEPARTMENTS from '../constants/DEPARTMENTS'
-import { updateOrg } from '../data/Database'
+// import { updateOrg } from '../data/Database'
 function OrganizationScreen({ navigation, route }) {
   // history = route.params.history
+  const  index = route.params.index
   const [inputs, setInputs] = React.useState({
     email: route.params.email,
     orgName: route.params.name,
@@ -42,6 +44,7 @@ function OrganizationScreen({ navigation, route }) {
     let email = inputs.email
     let phone = inputs.phone
     let trustLevel = inputs.trustLevel
+    let subervisor = inputs.subervisor
     let location = inputs.location
     let n3 = inputs.thirdYearNumber
     let n4 = inputs.forthYearNumber
@@ -49,15 +52,15 @@ function OrganizationScreen({ navigation, route }) {
     n3 = n3
     n4 = n4
     updateOrg(
-      route.params.index,
+      index,
       name,
       email,
+      spec,
       phone,
       location,
-      trustLevel,
-      spec,
       n3,
-      n4
+      n4,
+      subervisor
     )
     navigation.pop()
   }
@@ -105,7 +108,7 @@ function OrganizationScreen({ navigation, route }) {
             onChangeText={(text) => handleOnChange(text, 'subervisor')}
           />
           <Text>Trust Level : {inputs.trustLevel}</Text>
-          <Slider
+          {/* <Slider
             style={styles.slider}
             minimumValue={0}
             step={1}
@@ -114,7 +117,7 @@ function OrganizationScreen({ navigation, route }) {
             minimumTrackTintColor={COLORS.darkBlue}
             thumbTintColor={COLORS.darkBlue}
             value={inputs.trustLevel}
-          />
+          /> */}
 
           <Department
             label={inputs.specialization}

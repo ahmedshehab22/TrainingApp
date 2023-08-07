@@ -24,8 +24,8 @@ function CompaniesScreen({ navigation }) {
           thirdYearStudents: item.Number_Of_Students3.toString(),
           forthYearStudents: item.Number_Of_Students4.toString(),
           location: item.address.toString(),
-          subervisor:item.supervisor.toString(),
-          index:item.comp_id
+          subervisor: item.supervisor.toString(),
+          index: item.id
         })
       }
     />

@@ -43,11 +43,21 @@ export function addOrganization(
   })
 }
 
-
-export function updateOrg(id,name,spec,email,phone,supervisor,location,n3,n4,trustLevel)  {
-    db.transaction(tx => {
-      tx.executeSql('UPDATE Organization SET (comp_name,Specialization,e_mail,telephone,supervisor,address,Number_Of_Students3,Number_Of_Students4,trust_Level) = (?,?,?,?,?,?,?,?,?) WHERE id = ?', [name,spec,email,phone,supervisor,location,n3,n4,trustLevel, id])
-        },
-      );
-    };
+export function updateOrg(
+  id,
+  name,
+  email,
+  spec,
+  phone,
+  location,
+  n3,
+  n4,
+  subervisor
+) {
+  db.transaction((tx) =>
+    tx.executeSql(
+      'UPDATE Organization SET (comp_name,e_mail,Specialization,telephone,address,Number_Of_Students3,Number_Of_Students4,supervisor) = (?,?,?,?,?,?,?,?) WHERE id = ?',[name, email, spec, phone, location, n3, n4, subervisor, id]
+    )
+  )
+}
 export default function Database() {}
