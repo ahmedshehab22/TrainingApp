@@ -5,7 +5,7 @@ import { ShowOrganization } from '../data/Database'
 function CompaniesScreen({ navigation }) {
   const renderItem = ({ item, index }) => (
     <CompanyCard
-      name={item.comp_name ? item.comp_name.toString() : '#####'}
+      name={item.comp_name}
       phone={item.telephone.toString()}
       forthYearStudents={item.Number_Of_Students4.toString()}
       thirdYearStudents={item.Number_Of_Students3.toString()}
@@ -15,7 +15,7 @@ function CompaniesScreen({ navigation }) {
       supervisor={item.supervisor.toString()}
       location={item.address.toString()}
       onPress={() =>
-        navigation.replace('Organization Details', {
+          navigation.replace('Organization Details', {
           name: item.comp_name.toString(),
           phone: item.telephone.toString(),
           trustLevel: item.trust_Level.toString(),
@@ -27,7 +27,7 @@ function CompaniesScreen({ navigation }) {
           subervisor: item.supervisor.toString(),
           index: item.id
         })
-      }
+         }
     />
   )
   return (
@@ -36,7 +36,7 @@ function CompaniesScreen({ navigation }) {
         style={styles.list}
         data={ShowOrganization()}
         renderItem={renderItem}
-        keyExtractor={(item) => item.name}
+        keyExtractor={(item) => item.comp_name}
       />
     </View>
   )

@@ -16,8 +16,8 @@ function ResultScreen({ navigation, route }) {
   const renderItem = ({ item, index }) => (
     <View style={styles.itemContainer}>
       <View style={styles.textContainer}>
-        <Text style={styles.text1}>{item.company}</Text>
-        <Text style={styles.text2}>{item.studentName}</Text>
+        <Text style={styles.text1}>{item.comp_name}</Text>
+        <Text style={styles.text2}>{item.stud_name }</Text>
       </View>
       <View style={styles.vLine}></View>
     </View>
@@ -29,7 +29,7 @@ function ResultScreen({ navigation, route }) {
         style={styles.list}
         sections={DATA}
         renderItem={renderItem}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.stud_name}
         renderSectionHeader={({ section: { title } }) => (
           <Text style={styles.title}>{title}</Text>
         )}

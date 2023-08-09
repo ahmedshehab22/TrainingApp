@@ -1,5 +1,6 @@
 import React from 'react'
 import { useCallback } from 'react'
+import { join } from '../data/Database'
 import {
   StyleSheet,
   Text,
@@ -8,6 +9,7 @@ import {
   StatusBar,
   FlatList
 } from 'react-native'
+import CompanyCard from '../Components/CompanyCard'
 import COLORS from '../constants/COLORS'
 import Input from '../Components/Input'
 import Button from '../Components/Button'
@@ -16,7 +18,6 @@ import Department from '../Components/Department'
 import DEPARTMENTS from '../constants/DEPARTMENTS'
 import { updateOrg, deleteOrg } from '../data/Database'
 function OrganizationScreen({ navigation, route }) {
-  // history = route.params.history
   const index = route.params.index
   const [inputs, setInputs] = React.useState({
     email: route.params.email,
@@ -38,11 +39,8 @@ function OrganizationScreen({ navigation, route }) {
     },
     [inputs]
   )
-  function remove() {
-    deleteOrg(index)
-    navigation.pop()
-  }
-  function saveData() {
+
+  function save() {
     let name = inputs.orgName
     let email = inputs.email
     let phone = inputs.phone
@@ -68,7 +66,6 @@ function OrganizationScreen({ navigation, route }) {
     )
     navigation.pop()
   }
-
   return (
     <View style={styles.screen}>
       <ScrollView contentContainerStyle={styles.container}>
@@ -118,17 +115,6 @@ function OrganizationScreen({ navigation, route }) {
             label="Trust level"
             onChangeText={(text) => handleOnChange(text, 'trustLevel')}
           />
-          {/* <Slider
-            style={styles.slider}
-            minimumValue={0}
-            step={1}
-            maximumValue={100}
-            onValueChange={(value) => handleOnChange(value, 'trustLevel')}
-            minimumTrackTintColor={COLORS.darkBlue}
-            thumbTintColor={COLORS.darkBlue}
-            value={inputs.trustLevel}
-          /> */}
-
           <Department
             label={inputs.specialization}
             selected={true}
@@ -137,27 +123,40 @@ function OrganizationScreen({ navigation, route }) {
             onChangeText1={(text) => handleOnChange(text, 'thirdYearNumber')}
             onChangeText2={(text) => handleOnChange(text, 'forthYearNumber')}
           />
-          <Button title={'Save'} onPress={saveData} />
-          <Button title={'Remove organization'} onPress={remove} />
-          {/* <Text> __________________________________________________</Text>
-          {/* <Text style={styles.historytxt}>
-            History of the organization
-          </Text> */}
-          {/* <FlatList
-            data={history}
+          <Button title={'Save'} onPress={save} />
+          <Text> __________________________________________________</Text>
+          <Text style={styles.historytxt}>
+            History of the organization with us
+          </Text>
+          <FlatList
+            data={join(index)}
             keyExtractor={(item) => item.index}
-            renderItem={({ item, index }) => {
+            renderItem={({ item }) => {
               return (
                 <View>
-                  <Text style={styles.hint}>At {index + 2019} : </Text>
-                  <Text style={styles.descriptionText}>Number of students</Text>
-                  <Text style={styles.box}>{item.num}</Text>
-                  <Text style={styles.descriptionText}>Trust Level </Text>
-                  <Text style={styles.box}>{item.trust}%</Text>
+                  <Text>At {item.year}</Text>
+                  <Input
+                    keyboardType="numeric"
+                    iconName={'engineering'}
+                    text={item.capacity_3rd.toString()}
+                    label="Number of 3rd students "
+                  />
+                  <Input
+                    keyboardType="numeric"
+                    iconName={'engineering'}
+                    text={item.capacity_4th.toString()}
+                    label="Number of 4th students "
+                  />
+                  <Input
+                    keyboardType="numeric"
+                    iconName={'drive-file-rename-outline'}
+                    text={item.trust_level.toString()}
+                    label="Trust level at "
+                  />
                 </View>
               )
             }}
-          /> */}
+          />
         </View>
       </ScrollView>
     </View>

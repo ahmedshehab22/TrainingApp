@@ -1,4 +1,4 @@
-import React from 'react'
+
 import Home from './Screens/Home'
 import CompaniesScreen from './Screens/CompaniesScreen'
 import AddOrg from './Screens/AddOrg'
@@ -8,8 +8,6 @@ import COLORS from './constants/COLORS'
 import OrganizationScreen from './Screens/OrganizationScreen'
 import DistributionScreen from './Screens/DistributionScreen'
 import ResultScreen from './Screens/ResultScreen'
-import * as SQLite from 'expo-sqlite'
-import addstudent from './Screens/addstudent'
 const Stack = createNativeStackNavigator()
 export default function App() {
   return (
